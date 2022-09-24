@@ -7,7 +7,7 @@ describe("Gameboard factory function tests", () => {
 
   beforeEach(() => {
     gameboard = Gameboard();
-    
+    ship = Ship(3);
   });
 
   test("Initializes a 10x10 grid", () => {
@@ -16,10 +16,6 @@ describe("Gameboard factory function tests", () => {
   });
 
   describe('placeShip function tests', () => {
-    beforeEach(() => {
-      ship = Ship(3);
-    });
-
     test("Can place a ship horizontally on the board", () => {
       gameboard.placeShip(0, 0, ship, true);
       let testArray = [
@@ -68,4 +64,30 @@ describe("Gameboard factory function tests", () => {
       expect(testArray[2]).toEqual(ship);
     });
   })
+
+  describe('receiveAttack function tests', () => {
+    beforeEach(() => {
+      gameboard.placeShip(0, 4, ship, true);
+    });
+
+    test('Missed attack returns false', () => {
+      expect(gameboard.receiveAttack(0, 0)).toBe(false);
+    })
+
+    test('Successful attack returns true', () => {
+      expect(gameboard.receiveAttack(0, 4)).toBe(true);
+    });
+
+    test('Successful attack hits the correct position on horizontal ship', () => {
+      gameboard.receiveAttack(1, 4);
+      expect(ship.hits[1]).toBe(1);
+    })
+
+    test('Successful attack hits the correct position on vertical ship', () => {
+      const ship2 = Ship(3);
+      gameboard.placeShip(4, 2, ship2, false);
+      gameboard.receiveAttack(4, 3);
+      expect(ship2.hits[1]).toBe(1);
+    })
+  });
 });
