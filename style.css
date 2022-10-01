@@ -1,6 +1,7 @@
 :root {
   --ship: rgb(67, 189, 216);
   --sunkShip: rgb(232, 95, 95);
+  font-family: 'Black Ops One', cursive;
 }
 
 * {
@@ -11,12 +12,50 @@
 body {
   height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  background-color: rgb(214, 214, 214);
+}
+
+.header {
+  padding: 30px;
+  font-size: 2rem;
+}
+
+.place-fleet {
+  text-align: center;
+  z-index: 1;
+}
+
+.place-fleet p {
+  padding: 20px;
+  font-size: 1.5rem;
+}
+
+.place-fleet button {
+  cursor: pointer;
+  background-color: white;
+  padding: 10px;
+  font: inherit;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.place-fleet button:hover {
+  filter: brightness(90%);
+}
+
+.place-fleet button.active {
+  background-color: var(--ship);
 }
 
 .container {
+  position: absolute;
+  top: 70px;
+  height: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 50px;
 }
 
@@ -30,6 +69,8 @@ body {
 }
 
 .square {
+  background-color: white;
+  cursor: crosshair;
   border: 1px solid rgba(0, 0, 0, 0.437);
   display: flex;
   justify-content: center;
@@ -43,7 +84,6 @@ body {
 
 .AI:hover {
   background-color: rgb(235, 235, 235);
-  cursor: crosshair;
 }
 
 .ship {
@@ -81,11 +121,31 @@ body {
   left: calc(50% - 200px);
   background-color: white;
   padding: 10px;
-  height: 400px;
-  width: 400px;
   border-radius: 12px;
   transform: scale(0);
   transition: 0.2s ease-in-out;
+  text-align: center;
+}
+
+.game-over-content h1 {
+  margin-bottom: 20px;
+}
+
+.game-over-content button {
+  cursor: pointer;
+  background-color: white;
+  padding: 10px;
+  font: inherit;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.game-over-content button:hover {
+  filter: brightness(90%);
+}
+
+.game-over-content button:active {
+  background-color: var(--ship);
 }
 
 .show-modal {
