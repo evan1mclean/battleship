@@ -82,7 +82,7 @@ body {
   -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
-.AI:hover {
+.square:hover {
   background-color: rgb(235, 235, 235);
 }
 
