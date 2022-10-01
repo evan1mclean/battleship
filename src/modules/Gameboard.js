@@ -9,14 +9,28 @@ const Gameboard = () => {
 
   const placeShip = (x, y, ship, isHorizontal) => {
     // makes sure ship cannot go off the board
-    if (x + ship.length - 1 > 9 || y + ship.length - 1 > 9) {
+    /* if (x + ship.length - 1 > 9 || y + ship.length - 1 > 9) {
+      return;
+    } */
+
+    if (x + ship.length - 1 > 9 && isHorizontal === true)  {
+      return;
+    }
+    if (y + ship.length - 1 > 9 && isHorizontal === false) {
       return;
     }
 
     // makes sure that the ship will not overlap with another ship
     for (let i = 0; i < ship.length; i += 1) {
-      if (board[y][x + i] !== null || board[y + i][x] !== null) {
-        return;
+      if (isHorizontal === true) {
+        if (board[y][x + i] !== null) {
+          return;
+        }
+      }
+      if (isHorizontal === false) {
+        if (board[y + i][x] !== null) {
+          return;
+        }
       }
     }
 
