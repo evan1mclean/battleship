@@ -105,7 +105,7 @@ const UI = () => {
           if (gameboard1.board[dataRow][dataCol] === shipsArray[0]) {
             boards.forEach((board) => board.remove());
             renderBoard("Human", gameboard1, true);
-            renderBoard("AI", gameboard2, true);
+            renderBoard("AI", gameboard2, false);
             shipsArray.shift();
             placeShips(shipsArray, gameboard1, gameboard2, player1, player2);
           }

@@ -26,7 +26,7 @@ const Game = () => {
   }
 
   ui.renderBoard("Human", p1Board, true);
-  ui.renderBoard("AI", p2Board, true);
+  ui.renderBoard("AI", p2Board, false);
   ui.placeShips(p1Ships, p1Board, p2Board, p1, p2);
   ui.playAgainButton();
 };
