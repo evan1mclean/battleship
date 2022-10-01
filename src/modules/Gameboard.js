@@ -4,7 +4,7 @@ const Gameboard = () => {
   for (let i = 0; i < 10; i += 1) {
     board[i] = Array(10).fill(null);
   }
-  const missedAttacks = JSON.parse(JSON.stringify(board));
+  const attacks = JSON.parse(JSON.stringify(board));
   const shipsArray = [];
 
   const placeShip = (x, y, ship, isHorizontal) => {
@@ -23,9 +23,13 @@ const Gameboard = () => {
     // if ship is horizontal, place it starting from x, y, for as long as the ship
     // else, do the same thing vertically
     if (isHorizontal) {
-      for (let i = 0; i < ship.length; i += 1) board[y][x + i] = ship;
+      for (let i = 0; i < ship.length; i += 1) {
+        board[y][x + i] = ship;
+      }
     } else {
-      for (let i = 0; i < ship.length; i += 1) board[y + i][x] = ship;
+      for (let i = 0; i < ship.length; i += 1) {
+        board[y + i][x] = ship;
+      }
     }
     shipsArray.push(ship);
   };
@@ -49,6 +53,7 @@ const Gameboard = () => {
   // takes coordinates and returns if it was a hit or not
   const receiveAttack = (x, y) => {
     if (board[y][x] !== null) {
+      attacks[y][x] = "hit";
       // if the board position is an object, passes that object and coordinates into the function to find the position of the hit on the ship and then records that hit
       const position = findHitPosition(x, y, board[y][x]);
       board[y][x].hit(position);
@@ -59,7 +64,7 @@ const Gameboard = () => {
       }
       return true;
     }
-    missedAttacks[y][x] = "X";
+    attacks[y][x] = "X";
     return false;
   };
 
@@ -69,7 +74,7 @@ const Gameboard = () => {
     }
     return true;
   };
-  return { board, shipsArray, missedAttacks, placeShip, receiveAttack, allShipsSunk };
+  return { board, shipsArray, attacks, placeShip, receiveAttack, allShipsSunk };
 };
 
 export default Gameboard;

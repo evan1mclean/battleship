@@ -92,8 +92,12 @@ describe("Gameboard factory function tests", () => {
 
     test("Game board keeps track of missed attack", () => {
       gameboard.receiveAttack(7, 6);
-      console.log(gameboard.missedAttacks);
-      expect(gameboard.missedAttacks[6][7]).toBe("X");
+      expect(gameboard.attacks[6][7]).toBe("X");
+    });
+
+    test("Game board keeps track of successful attacks", () => {
+      gameboard.receiveAttack(0, 4);
+      expect(gameboard.attacks[4][0]).toBe("hit");
     });
   });
 
